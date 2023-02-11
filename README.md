@@ -1,2 +1,2 @@
 # helm-charts
-Helm charts for deploying Sqrl Planner and any services it depends on
+A collection of Helm deployment charts for Sqrl Planner.
