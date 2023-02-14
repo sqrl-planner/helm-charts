@@ -1,32 +1,9 @@
-# Default values for sqrl-planner.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-mongodb:
-  auth:
-    usernames:
-      - sqrl
-      - gator
-    passwords:
-      - password
-      - password
-    databases:
-      - sqrl
-      - gator
-
 sqrl-server:
   image:
     repository: sverch02/sqrl-server
     tag: main
   service:
     port: 8000
-  env:
-    MONGODB_HOST: mongodb
-    MONGODB_PORT: 27017
-    MONGODB_DB: sqrl
-    MONGODB_USERNAME: sqrl
-    MONGODB_PASSWORD: password
-    SERVER_NAME: 0.0.0.0:8000
 
 gator-app:
   image:

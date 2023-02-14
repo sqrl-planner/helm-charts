@@ -8,5 +8,8 @@
 .DS_Store
 .jsonnet-libs/example.json
 
+# Decrypted secrets
+**/*.yaml.dec
+
 # IDE
 .vscode

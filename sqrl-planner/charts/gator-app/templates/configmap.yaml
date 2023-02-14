@@ -1,0 +1,5 @@
+{{- include "common.configMap" (list . "gator-app.configMap") }}
+{{- define "gator-app.configMap" -}}
+data:
+  zeus: cat
+{{- end }}

@@ -1,0 +1,24 @@
+{{- include "common.deployment" (list . .Values .Values.autoscaling .Values.serviceAccount "sqrl-server.deployment") }}
+
+{{- define "sqrl-server.deployment" -}}
+spec:
+  template:
+    spec:
+      containers:
+      - {{- include "common.container" (append . "sqrl-server.container") | nindent 8 }}
+{{- end }}
+
+{{- define "sqrl-server.container" -}}
+ports:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+{{- end }}

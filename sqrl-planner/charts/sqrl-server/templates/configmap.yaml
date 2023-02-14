@@ -1,0 +1,5 @@
+{{- include "common.configMap" (list . "sqrl-server.configMap") }}
+{{- define "sqrl-server.configMap" -}}
+data:
+  zeus: cat
+{{- end }}
