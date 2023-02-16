@@ -1,1 +1,1 @@
-{{- include "common.serviceAccount" (list . .Values.serviceAccount) }}
+{{- include "common.service" (list . .Values.service) }}

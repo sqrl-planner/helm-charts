@@ -1,24 +1,38 @@
 {{- include "common.deployment" (list . .Values .Values.autoscaling .Values.serviceAccount "sqrl-server.deployment") }}
 
 {{- define "sqrl-server.deployment" -}}
+{{- $top := first . }}
+{{- $deployment := index . 1 }}
 spec:
   template:
     spec:
       containers:
-      - {{- include "common.container" (append . "sqrl-server.container") | nindent 8 }}
+      - {{- include "common.container" (list $top $deployment "sqrl-server.deployment.container") | nindent 8 }}
+      volumes:
+      - name: tmp
+        emptyDir: {}
 {{- end }}
 
-{{- define "sqrl-server.container" -}}
+{{- define "sqrl-server.deployment.container" -}}
+{{- $top := first . }}
 ports:
-  - name: http
-    containerPort: 80
-    protocol: TCP
+- name: http
+  containerPort: {{ $top.Values.service.port }}
+  protocol: TCP
 livenessProbe:
   httpGet:
-    path: /
+    path: /ping
     port: http
 readinessProbe:
   httpGet:
-    path: /
+    path: /ping
     port: http
+volumeMounts:
+- name: tmp
+  mountPath: /tmp
+envFrom:
+- configMapRef:
+    name: {{ include "common.fullname" $top }}
+- secretRef:
+    name: {{ include "common.fullname" $top }}
 {{- end }}

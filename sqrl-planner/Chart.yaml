@@ -26,7 +26,7 @@ appVersion: "0.1.0"
 # The backend microservices depend a shared MongoDB instance
 dependencies:
   - name: common
-    version: 0.4.1
+    version: 1.4.0
     repository: https://hahow-helm-charts.storage.googleapis.com/
   - name: mongodb
     version: 13.6.7

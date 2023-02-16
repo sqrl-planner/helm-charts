@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-# We don't set the image here, but in the subcharts
+# We don't set the image here, but in the umbrella chart
 image:
   repository: ""
   pullPolicy: IfNotPresent
@@ -38,8 +38,8 @@ securityContext:
   runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  type: NodePort
+  port: 5000
 
 ingress:
   enabled: false

@@ -1,10 +1,9 @@
-# Default values for common.
+# Default values for sqrl-server. These are setup for a local development environment.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
-# We don't set the image here, but in the subcharts
 image:
   repository: ""
   pullPolicy: IfNotPresent
@@ -17,7 +16,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -38,8 +37,8 @@ securityContext:
   runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  type: NodePort
+  port: 8000
 
 ingress:
   enabled: false

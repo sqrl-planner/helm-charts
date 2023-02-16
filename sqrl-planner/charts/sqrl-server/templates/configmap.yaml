@@ -1,5 +1,17 @@
 {{- include "common.configMap" (list . "sqrl-server.configMap") }}
 {{- define "sqrl-server.configMap" -}}
+{{- $top := first . }}
 data:
-  zeus: cat
+  # The bind port for the gunicorn server
+  PORT: {{ $top.Values.service.port | quote }}
+  # Defaults are given by $top.Values.global.config
+  # (Shared config values for all subcharts)
+  {{- if $top.Values.global.config }}
+  {{- toYaml $top.Values.global.config | nindent 2 }}
+  {{- end }}
+  # Override with $top.Values.config
+  # (Specific config values for this subchart)
+  {{- if $top.Values.config }}
+  {{- toYaml $top.Values.config | nindent 2 }}
+  {{- end }}
 {{- end }}
