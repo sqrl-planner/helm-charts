@@ -1,0 +1,19 @@
+# Values for the development environment.
+
+global:
+  config:
+    # Whether to run in debug mode?
+    FLASK_DEBUG: "true"
+    # How many workers and threads should your app use? WEB_CONCURRENCY defaults
+    # to the server's CPU count * 2. That is a good starting point. In development
+    # it's a good idea to use 1 to avoid race conditions when debugging.
+    WEB_CONCURRENCY: "1"
+    # Do you want code reloading to work with the gunicorn app server?
+    WEB_RELOAD: "true"
+    # The hostname defaults to the name of the Kubernetes service. Changes this
+    # if not using the shared MongoDB service.
+    MONGODB_HOST: sqrl-planner-mongodb
+    MONGODB_PORT: "27017"
+    # The hostname of the Gator service.
+    GATOR_HOST: sqrl-planner-gator-app
+    GATOR_PORT: "5000"
