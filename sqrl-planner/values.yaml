@@ -4,15 +4,11 @@ sqrl-server:
   image:
     repository: sverch02/sqrl-server
     tag: main
-  config:
-    MONGODB_DB: sqrl
 
 gator-app:
   image:
     repository: sverch02/gator-app
     tag: latest
-  config:
-    MONGODB_DB: gator
 
 # Default configuration shared between the sqrl-server and gator-app
 # These values are setup for running in DEVELOPMENT mode.
@@ -28,8 +24,8 @@ global:
     WEB_RELOAD: "true"
     # The hostname defaults to the name of the Kubernetes service. Changes this
     # if not using the shared MongoDB service.
-    MONGODB_HOST: mongodb
+    MONGODB_HOST: sqrl-planner-mongodb
     MONGODB_PORT: "27017"
     # The hostname of the Gator service.
-    GATOR_HOST: gator-app
+    GATOR_HOST: sqrl-planner-gator-app
     GATOR_PORT: "5000"
