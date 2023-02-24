@@ -3,9 +3,14 @@
 sqrl-server:
   image:
     repository: sverch02/sqrl-server
-    tag: main
+    tag: latest
 
 gator-app:
   image:
     repository: sverch02/gator-app
     tag: latest
+  config:
+    # The root URL for the Swagger API documentation, relative to the root of the
+    # web server. If not set or empty, the Swagger UI will not be available, and
+    # no documentation will be generated.
+    API_DOCS_URL: /docs/
