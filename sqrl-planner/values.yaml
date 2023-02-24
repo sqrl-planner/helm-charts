@@ -1,9 +1,9 @@
-# Default values for sqrl-planner for running in DEVELOPMENT mode.
+# Default values for sqrl-planner
 
 sqrl-server:
   image:
     repository: sverch02/sqrl-server
-    tag: 1.1.0-rc2
+    tag: latest
 
 gator-app:
   image:
@@ -14,22 +14,3 @@ gator-app:
     # web server. If not set or empty, the Swagger UI will not be available, and
     # no documentation will be generated.
     API_DOCS_URL: /docs/
-
-# Default configuration shared between the sqrl-server and gator-app
-# These values are setup for running in DEVELOPMENT mode.
-global:
-  config:
-    # Whether to run in debug mode?
-    FLASK_DEBUG: "true"
-    # How many workers and threads should your app use? WEB_CONCURRENCY defaults
-    # to the server's CPU count * 2. That is a good starting point. In development
-    # it's a good idea to use 1 to avoid race conditions when debugging.
-    WEB_CONCURRENCY: "1"
-    # Do you want code reloading to work with the gunicorn app server?
-    WEB_RELOAD: "true"
-    # The hostname defaults to the name of the Kubernetes service. Changes this
-    # if not using the shared MongoDB service.
-    MONGODB_HOST: sqrl-planner-mongodb
-    MONGODB_PORT: "27017"
-    # The hostname of the Gator service.
-    GATOR_HOST: http://sqrl-planner-gator-app:5000
