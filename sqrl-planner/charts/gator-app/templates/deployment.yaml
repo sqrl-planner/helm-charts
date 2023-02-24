@@ -5,6 +5,10 @@
 {{- $deployment := index . 1 }}
 spec:
   template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $top.Template.BasePath "/configmap.yaml") $top | sha256sum }}
+        checksum/secret: {{ include (print $top.Template.BasePath "/secret.yaml") $top | sha256sum }}
     spec:
       containers:
       - {{- include "common.container" (list $top $deployment "gator-app.deployment.container") | nindent 8 }}

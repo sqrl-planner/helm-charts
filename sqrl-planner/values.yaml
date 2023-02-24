@@ -3,16 +3,17 @@
 sqrl-server:
   image:
     repository: sverch02/sqrl-server
-    tag: main
-  config:
-    MONGODB_DB: sqrl
+    tag: 1.1.0-rc2
 
 gator-app:
   image:
     repository: sverch02/gator-app
-    tag: latest
+    tag: 0.1.1
   config:
-    MONGODB_DB: gator
+    # The root URL for the Swagger API documentation, relative to the root of the
+    # web server. If not set or empty, the Swagger UI will not be available, and
+    # no documentation will be generated.
+    API_DOCS_URL: /docs/
 
 # Default configuration shared between the sqrl-server and gator-app
 # These values are setup for running in DEVELOPMENT mode.
@@ -28,8 +29,7 @@ global:
     WEB_RELOAD: "true"
     # The hostname defaults to the name of the Kubernetes service. Changes this
     # if not using the shared MongoDB service.
-    MONGODB_HOST: mongodb
+    MONGODB_HOST: sqrl-planner-mongodb
     MONGODB_PORT: "27017"
     # The hostname of the Gator service.
-    GATOR_HOST: gator-app
-    GATOR_PORT: "5000"
+    GATOR_HOST: http://sqrl-planner-gator-app:5000
