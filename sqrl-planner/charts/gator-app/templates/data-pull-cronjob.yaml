@@ -1,0 +1,25 @@
+{{- include "common.cronJob" (list . .Values.cronJobs.dataPull .Values .Values.serviceAccount "gator-app.cronJobs.dataPull") }}
+{{- define "gator-app.cronJobs.dataPull" -}}
+{{- $top := first . }}
+{{- $values := index . 2 }}
+metadata:
+  name: {{ include "common.fullname" $top }}-data-pull
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - {{- include "common.container" (list $top $values "gator-app.cronJobs.dataPull.container") | nindent 12 }}
+          {{- include "gator-app.deployment.volumes" (list $top $values) | nindent 10 }}
+{{- end }}
+{{- define "gator-app.cronJobs.dataPull.container" -}}
+{{- include "gator-app.deployment.container" . | nindent 0 }}
+command:
+- /bin/sh
+- -c
+- |
+  #!/bin/sh
+  set -e
+  poetry run gator data pull
+{{- end }}

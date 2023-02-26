@@ -12,9 +12,13 @@ spec:
     spec:
       containers:
       - {{- include "common.container" (list $top $deployment "gator-app.deployment.container") | nindent 8 }}
-      volumes:
-      - name: tmp
-        emptyDir: {}
+      {{- include "gator-app.deployment.volumes" (list $top $deployment) | nindent 6 }}
+{{- end }}
+
+{{- define "gator-app.deployment.volumes" -}}
+volumes:
+- name: tmp
+  emptyDir: {}
 {{- end }}
 
 {{- define "gator-app.deployment.container" -}}
