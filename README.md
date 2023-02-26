@@ -58,7 +58,7 @@ $ helm install sqrl-planner ./sqrl-planner -f sqrl-planner/environments/values.<
 where `<env>` is the environment to deploy to (one of `dev`, `staging`, or `prod`). You'll need to decrypt the secrets file (to obtain a `.dec.yaml` file) before running this command. To do so, run the following command:
 ```bash
 
-$ helm secrets dec environments/secrets.<env>.yaml
+$ helm secrets dec sqrl-planner/environments/secrets.<env>.yaml
 
 ```
 which will decrypt the secrets file and store the decrypted version in a file of the same name with the `.dec.yaml` extension. Note that for the `dev` environment, the secrets file is not encrypted so you can just use the `secrets.dev.yaml` file directly.
