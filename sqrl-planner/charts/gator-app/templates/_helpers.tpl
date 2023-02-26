@@ -60,3 +60,24 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Base template for containers
+*/}}
+{{- define "gator-app.container" -}}
+{{- $top := first . }}
+volumeMounts:
+- name: tmp
+  mountPath: /tmp
+envFrom:
+- configMapRef:
+    name: {{ include "common.fullname" $top }}
+- secretRef:
+    name: {{ include "common.fullname" $top }}
+ports:
+- name: http
+  containerPort: {{ $top.Values.service.port }}
+  protocol: TCP
+readinessProbe: null
+livenessProbe: null
+{{- end }}

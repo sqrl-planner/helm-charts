@@ -14,11 +14,11 @@ global:
     # if not using the shared MongoDB service.
     MONGODB_HOST: sqrl-planner-mongodb
     MONGODB_PORT: "27017"
-    # The hostname of the Gator service.
-    GATOR_HOST: sqrl-planner-gator-app
-    GATOR_PORT: "5000"
 
 sqrl-server:
   image:
     repository: sverch02/sqrl-server@sha256
     tag: 0ea1285553ddd8f37a02a1dae2c0f6a462ad6533f81f575888d04d1d98b26287
+  config:
+    # The hostname of the Gator service.
+    GATOR_HOST: http://sqrl-planner-gator-app:5000

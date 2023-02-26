@@ -14,12 +14,12 @@ spec:
           {{- include "gator-app.deployment.volumes" (list $top $values) | nindent 10 }}
 {{- end }}
 {{- define "gator-app.cronJobs.dataPull.container" -}}
-{{- include "gator-app.deployment.container" . | nindent 0 }}
+{{- include "gator-app.container" . | nindent 0 }}
 command:
 - /bin/sh
 - -c
 - |
   #!/bin/sh
   set -e
-  poetry run gator data pull
+  poetry run gator data pull --verbose
 {{- end }}

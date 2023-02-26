@@ -31,7 +31,8 @@ It deploys the following resources:
 
 - A MongoDB deployment that provides a shared MongoDB instancee accessible by the microservices in the cluster
 - A `sqrl-server` deployment that runs the Sqrl Planner backend server
-- A `gator-app` deployment that runs the Gator data aggregation application
+- A `gator-app` deployment that runs the Gator data aggregation application and a `data-pull` cron job that pulls and
+  syncs data from tracked datasets on a schedule.
 
 ### Configuration and Secrets
 

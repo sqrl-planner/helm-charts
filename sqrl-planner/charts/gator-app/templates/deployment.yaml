@@ -22,25 +22,31 @@ volumes:
 {{- end }}
 
 {{- define "gator-app.deployment.container" -}}
-{{- $top := first . }}
-ports:
-- name: http
-  containerPort: {{ $top.Values.service.port }}
-  protocol: TCP
+{{- include "gator-app.container" . | nindent 0 }}
+{{- $values := index . 1 }}
+
+{{- $livenessProbe := $values.livenessProbe | default dict }}
+{{- $readinessProbe := $values.readinessProbe | default dict }}
+{{- if ($livenessProbe.enabled | default true) }}
 livenessProbe:
   httpGet:
     path: /ping
     port: http
+  initialDelaySeconds: {{ $livenessProbe.initialDelaySeconds | default 30 }}
+  periodSeconds: {{ $livenessProbe.periodSeconds | default 10 }}
+  timeoutSeconds: {{ $livenessProbe.timeoutSeconds | default 5 }}
+  successThreshold: {{ $livenessProbe.successThreshold | default 1 }}
+  failureThreshold: {{ $livenessProbe.failureThreshold | default 3 }}
+{{- end }}
+{{- if ($readinessProbe.enabled | default true) }}
 readinessProbe:
   httpGet:
     path: /ping
     port: http
-volumeMounts:
-- name: tmp
-  mountPath: /tmp
-envFrom:
-- configMapRef:
-    name: {{ include "common.fullname" $top }}
-- secretRef:
-    name: {{ include "common.fullname" $top }}
+  initialDelaySeconds: {{ $readinessProbe.initialDelaySeconds | default 30 }}
+  periodSeconds: {{ $readinessProbe.periodSeconds | default 10 }}
+  timeoutSeconds: {{ $readinessProbe.timeoutSeconds | default 5 }}
+  successThreshold: {{ $readinessProbe.successThreshold | default 1 }}
+  failureThreshold: {{ $readinessProbe.failureThreshold | default 3 }}
+{{- end }}
 {{- end }}
