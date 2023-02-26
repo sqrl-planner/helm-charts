@@ -10,15 +10,8 @@ global:
     WEB_CONCURRENCY: "1"
     # Do you want code reloading to work with the gunicorn app server?
     WEB_RELOAD: "true"
-    # The hostname defaults to the name of the Kubernetes service. Changes this
-    # if not using the shared MongoDB service.
-    MONGODB_HOST: sqrl-planner-mongodb
-    MONGODB_PORT: "27017"
 
 sqrl-server:
   image:
     repository: sverch02/sqrl-server@sha256
     tag: 0ea1285553ddd8f37a02a1dae2c0f6a462ad6533f81f575888d04d1d98b26287
-  config:
-    # The hostname of the Gator service.
-    GATOR_HOST: http://sqrl-planner-gator-app:5000
