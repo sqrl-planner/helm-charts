@@ -1,6 +1,16 @@
 # helm-charts
 A collection of Helm deployment charts for Sqrl Planner.
 
+## Contents
+- [Environments](#environments)
+- [Prerequisites](#prerequisites)
+  - [Helm Plugins](#helm-plugins)
+- [Sqrl Planner Backend](#sqrl-planner-backend)
+  - [Helm Dependencies](#helm-dependencies)
+  - [Configuration and Secrets](#configuration-and-secrets)
+  - [Deploying](#deploying)
+  - [Changing MongoDB Credentials](#changing-mongodb-credentials)
+
 ## Environments
 
 The following environments are supported:
@@ -33,6 +43,18 @@ It deploys the following resources:
 - A `sqrl-server` deployment that runs the Sqrl Planner backend server
 - A `gator-app` deployment that runs the Gator data aggregation application and a `data-pull` cron job that pulls and
   syncs data from tracked datasets on a schedule.
+
+### Helm Dependencies
+
+The following Helm repositories are required to deploy the sqrl-planner chart:
+
+- [bitnami](https://github.com/bitnami/charts) - A repository that contains Bitnami Helm charts for popular open source software
+- [hahow](https://github.com/hahow/common-chart) - A repository that contains a common base chart template
+
+See each repository's documentation for installation instructions. Once the repositories have been added, run the following command to build the dependencies:
+```bash
+$ helm dependency build sqrl-planner
+```
 
 ### Configuration and Secrets
 
