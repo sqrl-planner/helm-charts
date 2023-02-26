@@ -63,3 +63,8 @@ $ helm secrets dec sqrl-planner/environments/secrets.<env>.yaml
 
 ```
 which will decrypt the secrets file and store the decrypted version in a file of the same name with the `.dec.yaml` extension. Note that for the `dev` environment, the secrets file is not encrypted so you can just use the `secrets.dev.yaml` file directly.
+
+Due to MongoDB weirdness, if you're re-deploying the sqrl-planner chart with updated MongoDB credentials, you might need to delete the MongoDB persistent volume claim before re-deploying. To do so, run the following command:
+```bash
+kubectl delete pvc sqrl-planner-mongodb
+```
