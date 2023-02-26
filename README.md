@@ -66,7 +66,7 @@ which will decrypt the secrets file and store the decrypted version in a file of
 
 ### Changing MongoDB Credentials
 
-Due to MongoDB weirdness, if you're re-deploying the sqrl-planner chart with updated MongoDB credentials, the credentials might not be updated. To fix this, there are two options:
+Due to MongoDB weirdness, if you're re-deploying the sqrl-planner chart with updated MongoDB credentials, the credentials will not be updated (as they are stored in a volume that is not updated). To fix this, there are two options:
 
 1. Delete the MongoDB persistent volume claim and re-deploy the chart. To do so, run the following command:
 ```bash
