@@ -73,6 +73,7 @@ Due to MongoDB weirdness, if you're re-deploying the sqrl-planner chart with upd
 $ kubectl delete pvc sqrl-planner-mongodb
 ```
 This will delete all data stored in the MongoDB database, so only do this if you don't care about the data. In any case, you should back up the data before doing this.
+
 2. Manually update the MongoDB credentials. To do so, start by executing a shell in the MongoDB pod:
 ```bash
 $ kubectl exec --stdin --tty sqrl-planner-mongodb-<pod-id> -- /bin/bash
