@@ -27,7 +27,7 @@ It deploys the following resources:
 
 ### Configuration and Secrets
 
-Multiply configuration and secrets files are made available for configuring the backend services depending on the
+Multiple configuration and secrets files are made available for configuring the backend services depending on the
 deployment environment. The `values.yaml` file provides default values shared betweeen all environments. Each
 environment has its own `values.<environment>.yaml` file that overrides the default values.
 
