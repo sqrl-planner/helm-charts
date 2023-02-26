@@ -16,6 +16,14 @@ The following environments are supported:
 - Helm 3.0+
 - A Kubernetes cluster that is accessible from your local machine
 
+### Helm Plugins
+
+The following Helm plugins are required to deploy the charts in this repository:
+
+- [helm-secrets](https://github.com/jkroepke/helm-secrets) - A plugin that helps manage secrets in Git repositories using Mozilla SOPS
+
+See each plugin's documentation for installation instructions.
+
 ## Sqrl Planner Backend
 
 The `sqrl-planner` chart deploys all backend services needed to support the backend of the Sqrl Planner application.
@@ -47,4 +55,10 @@ environment:
 $ helm install sqrl-planner ./sqrl-planner -f environments/values.<env>.yaml -f environments/secrets.<env>.dec.yaml
 
 ```
-where `<env>` is the environment to deploy to (one of `dev`, `staging`, or `prod`). You'll need to decrypt the secrets file (to obtain a `.dec.yaml` file) before running this command!
+where `<env>` is the environment to deploy to (one of `dev`, `staging`, or `prod`). You'll need to decrypt the secrets file (to obtain a `.dec.yaml` file) before running this command. To do so, run the following command:
+```bash
+
+$ helm secrets dec environments/secrets.<env>.yaml
+
+```
+which will decrypt the secrets file and store the decrypted version in a file of the same name with the `.dec.yaml` extension.
