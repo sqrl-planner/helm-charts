@@ -32,7 +32,7 @@ deployment environment. The `values.yaml` file provides default values shared be
 environment has its own `values.<environment>.yaml` file that overrides the default values.
 
 Similarly, each environment has its own `secrets.<environment>.yaml` file that contains the secrets for the
-environment. These secrets are encrypted using the `helm secrets` plugin to ensure that they are safeley stored in
+environment. These secrets are encrypted using the `helm secrets` plugin to ensure that they are safely stored in
 the repository.
 
 Note that the `secrets.dev.yaml` file is not encrypted as it is an **example** file that is only used for local
