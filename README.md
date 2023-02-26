@@ -64,7 +64,27 @@ $ helm secrets dec sqrl-planner/environments/secrets.<env>.yaml
 ```
 which will decrypt the secrets file and store the decrypted version in a file of the same name with the `.dec.yaml` extension. Note that for the `dev` environment, the secrets file is not encrypted so you can just use the `secrets.dev.yaml` file directly.
 
-Due to MongoDB weirdness, if you're re-deploying the sqrl-planner chart with updated MongoDB credentials, you might need to delete the MongoDB persistent volume claim before re-deploying. To do so, run the following command:
+### Changing MongoDB Credentials
+
+Due to MongoDB weirdness, if you're re-deploying the sqrl-planner chart with updated MongoDB credentials, the credentials might not be updated. To fix this, there are two options:
+
+1. Delete the MongoDB persistent volume claim and re-deploy the chart. To do so, run the following command:
 ```bash
-kubectl delete pvc sqrl-planner-mongodb
+$ kubectl delete pvc sqrl-planner-mongodb
 ```
+This will delete all data stored in the MongoDB database, so only do this if you don't care about the data. In any case, you should back up the data before doing this.
+2. Manually update the MongoDB credentials. To do so, start by executing a shell in the MongoDB pod:
+```bash
+$ kubectl exec --stdin --tty sqrl-planner-mongodb-<pod-id> -- /bin/bash
+```
+where `<pod-id>` is the ID of the MongoDB pod, which you can find by running ```kubectl get pods```.
+
+If you'd like to add a new user or change the password for an existing user, run the following command to connect to the MongoDB database and change credentials:
+```bash
+$ mongo -u <username> -p <password> --authenticationDatabase admin
+# Create a new user that can read and write to a database
+> db.createUser({ user: "foo", pwd: "bar", roles: [ { role: "readWrite", db: "some-db" } ] })
+# Change the password for an existing user
+> db.changeUserPassword(username, password)
+```
+where `<username>` and `<password>` are the current MongoDB credentials. Once you've changed the credentials, exit the MongoDB shell and the pod shell. Then, re-deploy the chart. Changing the root username and/or password is a bit more complicated. You can find instructions [here](https://docs.bitnami.com/aws/infrastructure/mongodb/administration/change-reset-password/).
