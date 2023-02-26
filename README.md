@@ -44,7 +44,7 @@ From the root directory of the repository, run the following command to deploy t
 environment:
 ```bash
 
-$ helm install sqrl-planner ./sqrl-planner -f environments/values.<env>.yaml -f environments/secrets.<env>.yaml
+$ helm install sqrl-planner ./sqrl-planner -f environments/values.<env>.yaml -f environments/secrets.<env>.dec.yaml
 
 ```
-where `<env>` is the environment to deploy to (one of `dev`, `staging`, or `prod`).
+where `<env>` is the environment to deploy to (one of `dev`, `staging`, or `prod`). You'll need to decrypt the secrets file (to obtain a `.dec.yaml` file) before running this command!
